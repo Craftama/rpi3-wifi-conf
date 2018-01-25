@@ -22,7 +22,7 @@ def wifi_connect(ssid, psk):
     f.write('\n')
     f.write('network={\n')
     f.write('    ssid="' + ssid + '"\n')
-    f.write('    psk="' + psk + '"\n')
+    f.write('    psk=' + psk + '\n')
     f.write('}\n')
     f.close()
 
