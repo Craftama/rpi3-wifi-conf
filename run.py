@@ -113,7 +113,7 @@ def handle_client(client_sock):
 
     print("ip address: " + ip_address)
 
-    client_sock.send("ip-addres:" + ip_address + "!")
+    client_sock.send("ip-address:" + ip_address + "!")
 
     return
 
