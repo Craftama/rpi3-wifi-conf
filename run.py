@@ -19,8 +19,8 @@ def wifi_connect(ssid, psk):
     f.write('update_config=1\n')
     f.write('\n')
     f.write('network={\n')
-    f.write('    ssid="' + ssid + '"\n')
-    f.write('    psk=' + psk + '\n')
+    f.write('    ssid="' + ssid.decode("utf-8") + '"\n')
+    f.write('    psk=' + psk.decode("utf-8") + '\n')
     f.write('}\n')
     f.close()
 
@@ -57,12 +57,15 @@ def wifi_connect(ssid, psk):
 
     ip_address = "<Not Set>"
 
+    out = out.decode('utf-8')
+
     for l in out.split('\n'):
         if l.strip().startswith("inet addr:"):
             ip_address = l.strip().split(' ')[1].split(':')[1]
+            break
         elif l.strip().startswith("inet"):
             ip_address = l.strip().split(' ')[1]
-
+            break
     return ip_address
 
 
@@ -71,8 +74,10 @@ def ssid_discovered():
 
     wifi_info = 'Found ssid : \n'
 
-    for current in range(len(Cells)):
-        wifi_info += Cells[current].ssid + "\n"
+    cells = [c for c in Cells]
+
+    for current in range(len(cells)):
+        wifi_info += cells[current].ssid + "\n"
 
     wifi_info += "!"
 
